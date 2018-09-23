@@ -1,0 +1,8 @@
+
+<cc-phone [user]="standard" (zoom)="displayBig($event)" ></cc-phone>
+<hr>
+<cc-phone [user]="sommelier" (zoom)="displayBig($event)"></cc-phone>
+<hr>
+<cc-phone [user]="boucher" (zoom)="displayBig($event)"></cc-phone>
+
+<div class="phone" *ngIf="numberToDisplay"> {{numberToDisplay}} </div>

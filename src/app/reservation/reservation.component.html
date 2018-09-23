@@ -1,0 +1,46 @@
+<div *ngIf="!isScheduleOk">
+    <form [formGroup]="reservationForm" (submit)="saveReservation()" >
+        <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder="Choisir la date" formControlName='date'>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker startView="year" [startAt]="date"></mat-datepicker>
+            <!-- startView="month" -->
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="Heure de réservation" formControlName="time">
+                <mat-option *ngFor="let time of timeOptions" [value]="time">
+                    {{time}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="Combien de personnes" formControlName="people">
+                <mat-option *ngFor="let po of peopleOptions" [value]="po">
+                    {{po}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button mat-button type="submit">Confirmer l'horaire</button>
+    </form>
+</div>
+<!-- {{reservationForm.value | json}} -->
+
+<div *ngIf="isScheduleOk">
+    <form #f="ngForm" (submit)="finalizeReservation(f.value)">
+        <mat-form-field>
+            <input matInput type="text" name="firstName" [(ngModel)]="client.firstName" placeholder="nom">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="text" name="lastName" [(ngModel)]="client.lastName" placeholder="prenoms">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="text" name="email" [(ngModel)]="client.email" placeholder="email">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="text" name="tel" [(ngModel)]="client.phone" placeholder="phone">
+        </mat-form-field>
+        <button mat-button type="submit">Réserver</button>
+    </form>
+</div>
+
+<!-- {{f.controls.firstName?.value}} -->
